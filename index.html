@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Gestão Integrado</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; background-color: #f0f2f5; margin: 0; }
+        
+        /* Menu Lateral ou Superior */
+        nav { background-color: #1a73e8; padding: 10px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; position: sticky; top: 0; z-index: 100; }
+        nav button { background: rgba(255,255,255,0.2); border: none; color: white; padding: 10px 15px; border-radius: 5px; cursor: pointer; font-weight: bold; }
+        nav button:hover { background: rgba(255,255,255,0.4); }
+        nav button.active { background: white; color: #1a73e8; }
+
+        .container { max-width: 500px; margin: 30px auto; background: white; padding: 25px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .form-section { display: none; } /* Esconde todas as seções por padrão */
+        .form-section.active { display: block; } /* Mostra apenas a ativa */
+
+        h2 { color: #1a73e8; border-bottom: 2px solid #eee; padding-bottom: 10px; margin-top: 0; }
+        label { display: block; margin: 15px 0 5px; font-weight: bold; color: #555; }
+        select, input, textarea { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; }
+        button.submit-btn { width: 100%; padding: 12px; background-color: #28a745; color: white; border: none; border-radius: 4px; margin-top: 20px; cursor: pointer; font-size: 16px; }
+        button.submit-btn:disabled { background-color: #ccc; }
+    </style>
+</head>
+<body>
+
+<nav>
+    <button onclick="showSection('ponto')" id="btn-ponto" class="active">Ponto</button>
+    <button onclick="showSection('ausencias')" id="btn-ausencias">Ausências</button>
+    <button onclick="showSection('ocorrencias')" id="btn-ocorrencias">Ocorrências</button>
+    <button onclick="showSection('carga')" id="btn-carga">Carga</button>
+    <button onclick="showSection('avisos')" id="btn-avisos">Avisos</button>
+</nav>
+
+<div class="container">
+    
+    <div id="section-ponto" class="form-section active">
+        <h2>Registro de Ponto</h2>
+        <form onsubmit="enviarDados(event, 'Ponto')">
+            <label>Colaborador</label>
+            <select name="nome" required>
+                <option value="" disabled selected>Selecione...</option>
+            <option value="AILTON RODRIGUES DE SOUZA | Mat: 81065191 | Fun: Ciclista">AILTON RODRIGUES DE SOUZA | Mat: 81065191 | Fun: Ciclista</option>
+<option value="ALEXANDRE GANZER DE JESUS | Mat: 81136439 | Fun: Motociclista">ALEXANDRE GANZER DE JESUS | Mat: 81136439 | Fun: Motociclista</option>
+<option value="ANDERSON DOS REIS | Mat: 81063709 | Fun: Motociclista">ANDERSON DOS REIS | Mat: 81063709 | Fun: Motociclista</option>
+<option value="ANDERSON LUIS MENDES | Mat: 81112955 | Fun: Ciclista">ANDERSON LUIS MENDES | Mat: 81112955 | Fun: Ciclista</option>
+<option value="ANTONIO APARECIDO AGOSTINHO | Mat: 88926257 | Fun: Motorista">ANTONIO APARECIDO AGOSTINHO | Mat: 88926257 | Fun: Motorista</option>
+<option value="ARY DOS SANTOS | Mat: 81114877 | Fun: Interno">ARY DOS SANTOS | Mat: 81114877 | Fun: Interno</option>
+<option value="DAVID APARECIDO DA SILVA | Mat: 81131259 | Fun: Motociclista">DAVID APARECIDO DA SILVA | Mat: 81131259 | Fun: Motociclista</option>
+<option value="DOUGLAS LIRA DO CARMO | Mat: 81126468 | Fun: Motociclista">DOUGLAS LIRA DO CARMO | Mat: 81126468 | Fun: Motociclista</option>
+<option value="EDEMILSON DE PAULA | Mat: 88926249 | Fun: Interno">EDEMILSON DE PAULA | Mat: 88926249 | Fun: Interno</option>
+<option value="EDILSON AMARO DA SILVA JUNIOR | Mat: 89071093 | Fun: Ciclista">EDILSON AMARO DA SILVA JUNIOR | Mat: 89071093 | Fun: Ciclista</option>
+<option value="ERICSON TOMAZ NOBRE | Mat: 89243820 | Fun: Motociclista">ERICSON TOMAZ NOBRE | Mat: 89243820 | Fun: Motociclista</option>
+<option value="FLAVIO LUCIANO DA SILVA | Mat: 81111630 | Fun: Motorista">FLAVIO LUCIANO DA SILVA | Mat: 81111630 | Fun: Motorista</option>
+<option value="FRANCISCO NETO DA CONCEICAO | Mat: 81052197 | Fun: Motociclista">FRANCISCO NETO DA CONCEICAO | Mat: 81052197 | Fun: Motociclista</option>
+<option value="GENARO ELISIO BARBOSA | Mat: 89199472 | Fun: Motociclista">GENARO ELISIO BARBOSA | Mat: 89199472 | Fun: Motociclista</option>
+<option value="GILDEMBERG SANTOS LIMA | Mat: 89148690 | Fun: Motorista">GILDEMBERG SANTOS LIMA | Mat: 89148690 | Fun: Motorista</option>
+<option value="GILDERLANDIA SOUZA DA CUNHA MATIAS | Mat: 81077750 | Fun: Interno">GILDERLANDIA SOUZA DA CUNHA MATIAS | Mat: 81077750 | Fun: Interno</option>
+<option value="GILMAR ALEXANDRE VASCONCELOS | Mat: 89151461 | Fun: Motociclista">GILMAR ALEXANDRE VASCONCELOS | Mat: 89151461 | Fun: Motociclista</option>
+<option value="GUSTAVO SIMOES BARBOSA | Mat: 81060955 | Fun: Ciclista">GUSTAVO SIMOES BARBOSA | Mat: 81060955 | Fun: Ciclista</option>
+<option value="JOSE NILTON DA SILVA | Mat: 89084306 | Fun: Pedestre">JOSE NILTON DA SILVA | Mat: 89084306 | Fun: Pedestre</option>
+<option value="JOSUE LIMA DOS SANTOS | Mat: 89014138 | Fun: Motorista">JOSUE LIMA DOS SANTOS | Mat: 89014138 | Fun: Motorista</option>
+<option value="LENON MOREIRA ANTUNES | Mat: 81082991 | Fun: Gestão">LENON MOREIRA ANTUNES | Mat: 81082991 | Fun: Gestão</option>
+<option value="LUIS CARLOS DE ALMEIDA SANTOS | Mat: 81111111 | Fun: Pedestre">LUIS CARLOS DE ALMEIDA SANTOS | Mat: 81111111 | Fun: Pedestre</option>
+<option value="LUIZ CARLOS DA SILVA PAULA | Mat: 88991741 | Fun: Gestão">LUIZ CARLOS DA SILVA PAULA | Mat: 88991741 | Fun: Gestão</option>
+<option value="LUIZ FERNANDO VIEIRA | Mat: 81090544 | Fun: Gestão">LUIZ FERNANDO VIEIRA | Mat: 81090544 | Fun: Gestão</option>
+<option value="LUIZ GUSTAVO RIBEIRO | Mat: 89114078 | Fun: Motociclista">LUIZ GUSTAVO RIBEIRO | Mat: 89114078 | Fun: Motociclista</option>
+<option value="MARCEL RODRIGUES SILVEIRA | Mat: 81074085 | Fun: Ciclista">MARCEL RODRIGUES SILVEIRA | Mat: 81074085 | Fun: Ciclista</option>
+<option value="MARCIA PEREIRA DOS SANTOS | Mat: 81076681 | Fun: Interno">MARCIA PEREIRA DOS SANTOS | Mat: 81076681 | Fun: Interno</option>
+<option value="MARCIO ROBERTO RODRIGUES | Mat: 89175468 | Fun: Motociclista">MARCIO ROBERTO RODRIGUES | Mat: 89175468 | Fun: Motociclista</option>
+<option value="MARIA CLAUDILENE DOS SANTOS REIS | Mat: 81096402 | Fun: Pedestre">MARIA CLAUDILENE DOS SANTOS REIS | Mat: 81096402 | Fun: Pedestre</option>
+<option value="MARIA DE NAZARE DA SILVA SILVESTRE | Mat: 81139926 | Fun: Motorista">MARIA DE NAZARE DA SILVA SILVESTRE | Mat: 81139926 | Fun: Motorista</option>
+<option value="NEEMIAS MISAEL DIAS DE CARVALHO | Mat: 81076541 | Fun: Motorista">NEEMIAS MISAEL DIAS DE CARVALHO | Mat: 81076541 | Fun: Motorista</option>
+<option value="NEY DILSON MOREIRA ALVES | Mat: 81055293 | Fun: Ciclista">NEY DILSON MOREIRA ALVES | Mat: 81055293 | Fun: Ciclista</option>
+<option value="PATRICIA SIMOES BARBOSA DA LUZ | Mat: 81068565 | Fun: Pedestre">PATRICIA SIMOES BARBOSA DA LUZ | Mat: 81068565 | Fun: Pedestre</option>
+<option value="ROBERTO FAVARON RENALDINO | Mat: 89203909 | Fun: Motociclista">ROBERTO FAVARON RENALDINO | Mat: 89203909 | Fun: Motociclista</option>
+<option value="ROBSON LUIS DE ARRUDA MOURA | Mat: 81066228 | Fun: Motociclista">ROBSON LUIS DE ARRUDA MOURA | Mat: 81066228 | Fun: Motociclista</option>
+<option value="ROSANA MENDES | Mat: 81078170 | Fun: Pedestre">ROSANA MENDES | Mat: 81078170 | Fun: Pedestre</option>
+<option value="SEVERINO DA SILVA DELGADO | Mat: 81055366 | Fun: Ciclista">SEVERINO DA SILVA DELGADO | Mat: 81055366 | Fun: Ciclista</option>
+<option value="SILVANA VIEIRA DA SILVA | Mat: 89203690 | Fun: Pedestre">SILVANA VIEIRA DA SILVA | Mat: 89203690 | Fun: Pedestre</option>
+<option value="SIMONE GOMES BEZERRA BARBOSA | Mat: 81112874 | Fun: Motorista">SIMONE GOMES BEZERRA BARBOSA | Mat: 81112874 | Fun: Motorista</option>
+<option value="WILLIAM DE OLIVEIRA MOURA | Mat: 81106416 | Fun: Motorista">WILLIAM DE OLIVEIRA MOURA | Mat: 81106416 | Fun: Motorista</option>
+<option value="WILSON LIMA DE OLIVEIRA | Mat: 81075715 | Fun: Motorista">WILSON LIMA DE OLIVEIRA | Mat: 81075715 | Fun: Motorista</option>
+</select>
+            <label>Motivo</label>
+            <select name="motivoPonto" required>
+                <option value="Presente">Presente</option>
+                <option value="AM">AM</option>
+                <option value="LM">LM</option>
+                <option value="Folga">Folga</option>
+            </select>
+            <button type="submit" class="submit-btn">Registrar Ponto</button>
+        </form>
+    </div>
+
+    <div id="section-ausencias" class="form-section">
+        <h2>Ausências Programadas</h2>
+        <form onsubmit="enviarDados(event, 'Ausencias')">
+            <label>Colaborador</label>
+            <select name="colaborador" required>
+                <option value="" disabled selected>Selecione...</option>
+            <option value="AILTON RODRIGUES DE SOUZA | Mat: 81065191 | Fun: Ciclista">AILTON RODRIGUES DE SOUZA | Mat: 81065191 | Fun: Ciclista</option>
+<option value="ALEXANDRE GANZER DE JESUS | Mat: 81136439 | Fun: Motociclista">ALEXANDRE GANZER DE JESUS | Mat: 81136439 | Fun: Motociclista</option>
+<option value="ANDERSON DOS REIS | Mat: 81063709 | Fun: Motociclista">ANDERSON DOS REIS | Mat: 81063709 | Fun: Motociclista</option>
+<option value="ANDERSON LUIS MENDES | Mat: 81112955 | Fun: Ciclista">ANDERSON LUIS MENDES | Mat: 81112955 | Fun: Ciclista</option>
+<option value="ANTONIO APARECIDO AGOSTINHO | Mat: 88926257 | Fun: Motorista">ANTONIO APARECIDO AGOSTINHO | Mat: 88926257 | Fun: Motorista</option>
+<option value="ARY DOS SANTOS | Mat: 81114877 | Fun: Interno">ARY DOS SANTOS | Mat: 81114877 | Fun: Interno</option>
+<option value="DAVID APARECIDO DA SILVA | Mat: 81131259 | Fun: Motociclista">DAVID APARECIDO DA SILVA | Mat: 81131259 | Fun: Motociclista</option>
+<option value="DOUGLAS LIRA DO CARMO | Mat: 81126468 | Fun: Motociclista">DOUGLAS LIRA DO CARMO | Mat: 81126468 | Fun: Motociclista</option>
+<option value="EDEMILSON DE PAULA | Mat: 88926249 | Fun: Interno">EDEMILSON DE PAULA | Mat: 88926249 | Fun: Interno</option>
+<option value="EDILSON AMARO DA SILVA JUNIOR | Mat: 89071093 | Fun: Ciclista">EDILSON AMARO DA SILVA JUNIOR | Mat: 89071093 | Fun: Ciclista</option>
+<option value="ERICSON TOMAZ NOBRE | Mat: 89243820 | Fun: Motociclista">ERICSON TOMAZ NOBRE | Mat: 89243820 | Fun: Motociclista</option>
+<option value="FLAVIO LUCIANO DA SILVA | Mat: 81111630 | Fun: Motorista">FLAVIO LUCIANO DA SILVA | Mat: 81111630 | Fun: Motorista</option>
+<option value="FRANCISCO NETO DA CONCEICAO | Mat: 81052197 | Fun: Motociclista">FRANCISCO NETO DA CONCEICAO | Mat: 81052197 | Fun: Motociclista</option>
+<option value="GENARO ELISIO BARBOSA | Mat: 89199472 | Fun: Motociclista">GENARO ELISIO BARBOSA | Mat: 89199472 | Fun: Motociclista</option>
+<option value="GILDEMBERG SANTOS LIMA | Mat: 89148690 | Fun: Motorista">GILDEMBERG SANTOS LIMA | Mat: 89148690 | Fun: Motorista</option>
+<option value="GILDERLANDIA SOUZA DA CUNHA MATIAS | Mat: 81077750 | Fun: Interno">GILDERLANDIA SOUZA DA CUNHA MATIAS | Mat: 81077750 | Fun: Interno</option>
+<option value="GILMAR ALEXANDRE VASCONCELOS | Mat: 89151461 | Fun: Motociclista">GILMAR ALEXANDRE VASCONCELOS | Mat: 89151461 | Fun: Motociclista</option>
+<option value="GUSTAVO SIMOES BARBOSA | Mat: 81060955 | Fun: Ciclista">GUSTAVO SIMOES BARBOSA | Mat: 81060955 | Fun: Ciclista</option>
+<option value="JOSE NILTON DA SILVA | Mat: 89084306 | Fun: Pedestre">JOSE NILTON DA SILVA | Mat: 89084306 | Fun: Pedestre</option>
+<option value="JOSUE LIMA DOS SANTOS | Mat: 89014138 | Fun: Motorista">JOSUE LIMA DOS SANTOS | Mat: 89014138 | Fun: Motorista</option>
+<option value="LENON MOREIRA ANTUNES | Mat: 81082991 | Fun: Gestão">LENON MOREIRA ANTUNES | Mat: 81082991 | Fun: Gestão</option>
+<option value="LUIS CARLOS DE ALMEIDA SANTOS | Mat: 81111111 | Fun: Pedestre">LUIS CARLOS DE ALMEIDA SANTOS | Mat: 81111111 | Fun: Pedestre</option>
+<option value="LUIZ CARLOS DA SILVA PAULA | Mat: 88991741 | Fun: Gestão">LUIZ CARLOS DA SILVA PAULA | Mat: 88991741 | Fun: Gestão</option>
+<option value="LUIZ FERNANDO VIEIRA | Mat: 81090544 | Fun: Gestão">LUIZ FERNANDO VIEIRA | Mat: 81090544 | Fun: Gestão</option>
+<option value="LUIZ GUSTAVO RIBEIRO | Mat: 89114078 | Fun: Motociclista">LUIZ GUSTAVO RIBEIRO | Mat: 89114078 | Fun: Motociclista</option>
+<option value="MARCEL RODRIGUES SILVEIRA | Mat: 81074085 | Fun: Ciclista">MARCEL RODRIGUES SILVEIRA | Mat: 81074085 | Fun: Ciclista</option>
+<option value="MARCIA PEREIRA DOS SANTOS | Mat: 81076681 | Fun: Interno">MARCIA PEREIRA DOS SANTOS | Mat: 81076681 | Fun: Interno</option>
+<option value="MARCIO ROBERTO RODRIGUES | Mat: 89175468 | Fun: Motociclista">MARCIO ROBERTO RODRIGUES | Mat: 89175468 | Fun: Motociclista</option>
+<option value="MARIA CLAUDILENE DOS SANTOS REIS | Mat: 81096402 | Fun: Pedestre">MARIA CLAUDILENE DOS SANTOS REIS | Mat: 81096402 | Fun: Pedestre</option>
+<option value="MARIA DE NAZARE DA SILVA SILVESTRE | Mat: 81139926 | Fun: Motorista">MARIA DE NAZARE DA SILVA SILVESTRE | Mat: 81139926 | Fun: Motorista</option>
+<option value="NEEMIAS MISAEL DIAS DE CARVALHO | Mat: 81076541 | Fun: Motorista">NEEMIAS MISAEL DIAS DE CARVALHO | Mat: 81076541 | Fun: Motorista</option>
+<option value="NEY DILSON MOREIRA ALVES | Mat: 81055293 | Fun: Ciclista">NEY DILSON MOREIRA ALVES | Mat: 81055293 | Fun: Ciclista</option>
+<option value="PATRICIA SIMOES BARBOSA DA LUZ | Mat: 81068565 | Fun: Pedestre">PATRICIA SIMOES BARBOSA DA LUZ | Mat: 81068565 | Fun: Pedestre</option>
+<option value="ROBERTO FAVARON RENALDINO | Mat: 89203909 | Fun: Motociclista">ROBERTO FAVARON RENALDINO | Mat: 89203909 | Fun: Motociclista</option>
+<option value="ROBSON LUIS DE ARRUDA MOURA | Mat: 81066228 | Fun: Motociclista">ROBSON LUIS DE ARRUDA MOURA | Mat: 81066228 | Fun: Motociclista</option>
+<option value="ROSANA MENDES | Mat: 81078170 | Fun: Pedestre">ROSANA MENDES | Mat: 81078170 | Fun: Pedestre</option>
+<option value="SEVERINO DA SILVA DELGADO | Mat: 81055366 | Fun: Ciclista">SEVERINO DA SILVA DELGADO | Mat: 81055366 | Fun: Ciclista</option>
+<option value="SILVANA VIEIRA DA SILVA | Mat: 89203690 | Fun: Pedestre">SILVANA VIEIRA DA SILVA | Mat: 89203690 | Fun: Pedestre</option>
+<option value="SIMONE GOMES BEZERRA BARBOSA | Mat: 81112874 | Fun: Motorista">SIMONE GOMES BEZERRA BARBOSA | Mat: 81112874 | Fun: Motorista</option>
+<option value="WILLIAM DE OLIVEIRA MOURA | Mat: 81106416 | Fun: Motorista">WILLIAM DE OLIVEIRA MOURA | Mat: 81106416 | Fun: Motorista</option>
+<option value="WILSON LIMA DE OLIVEIRA | Mat: 81075715 | Fun: Motorista">WILSON LIMA DE OLIVEIRA | Mat: 81075715 | Fun: Motorista</option>
+
+            </select>
+            <label>Tipo</label>
+            <select name="tipo" required>
+                <option value="Férias">Férias</option>
+                <option value="Folga">Folga</option>
+                <option value="Licensa">Licensa</option>
+                <option value="Particular">Particular</option>
+            </select>
+            <label>Início</label>
+            <input type="date" name="inicio" required>
+            <label>Fim</label>
+            <input type="date" name="fim" required>
+            <button type="submit" class="submit-btn">Salvar Ausência</button>
+        </form>
+    </div>
+
+    <div id="section-ocorrencias" class="form-section">
+        <h2>Ocorrências Gerais</h2>
+        <form onsubmit="enviarDados(event, 'Ocorrencias')">
+            <label>Motivo</label>
+            <select name="motivo" required>
+                <option value="Atraso LTR">Atraso LTR</option>
+                <option value="Sedex 2º carga">Sedex 2º carga</option>
+                <option value="Diversos">Diversos</option>
+            </select>
+            <label>Detalhes</label>
+            <textarea name="detalhes" required></textarea>
+            <label>Número da CIE (Opcional)</label>
+            <input type="text" name="cie">
+            <button type="submit" class="submit-btn">Salvar Ocorrência</button>
+        </form>
+    </div>
+
+    <div id="section-carga" class="form-section">
+        <h2>Controle de Carga</h2>
+        <form onsubmit="enviarDados(event, 'Carga')">
+            <label>Qualificados Distribuídos/Adiantados</label>
+            <input type="text" name="qualificados" required>
+            <label>Quantidade</label>
+            <input type="number" name="quantidade" required>
+            <button type="submit" class="submit-btn">Registrar Carga</button>
+        </form>
+    </div>
+
+    <div id="section-avisos" class="form-section">
+        <h2>Quadro de Avisos</h2>
+        <form onsubmit="enviarDados(event, 'Avisos')">
+            <label>Título do Aviso</label>
+            <input type="text" name="titulo" required>
+            <label>Descrição</label>
+            <textarea name="descricao" required></textarea>
+            <label>Prioridade</label>
+            <select name="prioridade" required>
+                <option value="Alta">Alta</option>
+                <option value="Média">Média</option>
+                <option value="Baixa">Baixa</option>
+            </select>
+            <label>Prazo</label>
+            <input type="date" name="prazo" required>
+            <button type="submit" class="submit-btn">Publicar Aviso</button>
+        </form>
+    </div>
+
+</div>
+
+<script>
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbxNwKN_MwXOhCLyeBmuFBlkJjFkKi_iLFBLs9znxg4xw9jKefCmq0GBCcQbhE04lsNd/exec';
+
+    // Função para trocar de aba no HTML
+    function showSection(sectionId) {
+        document.querySelectorAll('.form-section').forEach(s => s.classList.remove('active'));
+        document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+        
+        document.getElementById('section-' + sectionId).classList.add('active');
+        document.getElementById('btn-' + sectionId).classList.add('active');
+    }
+
+    // Função única para enviar qualquer formulário
+    function enviarDados(event, nomeAba) {
+        event.preventDefault();
+        const form = event.target;
+        const btn = form.querySelector('button');
+        btn.disabled = true;
+        btn.innerText = 'Enviando...';
+
+        // Pega todos os dados do formulário automaticamente
+        const formData = new FormData(form);
+        const objetoDados = { abaDestino: nomeAba };
+        formData.forEach((value, key) => objetoDados[key] = value);
+
+        fetch(scriptURL, { method: 'POST', body: JSON.stringify(objetoDados) })
+        .then(res => {
+            alert('Dados salvos com sucesso na aba ' + nomeAba);
+            form.reset();
+        })
+        .catch(err => alert('Erro: ' + err.message))
+        .finally(() => {
+            btn.disabled = false;
+            btn.innerText = 'Enviar';
+        });
+    }
+</script>
+
+</body>
+</html>
