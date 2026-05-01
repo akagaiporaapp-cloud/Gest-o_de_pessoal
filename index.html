@@ -2,249 +2,620 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema de Gestão Integrado</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes">
+    <title>CDD Itu | Sistema de Gestão Integrada</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        body { font-family: 'Segoe UI', Tahoma, sans-serif; background-color: #f0f2f5; margin: 0; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f4f7fc;
+            color: #1e2a3e;
+            padding-bottom: 30px;
+        }
+
+        /* Header */
+        .top-header {
+            background: linear-gradient(135deg, #0f3b5f 0%, #1a5a7a 100%);
+            color: white;
+            padding: 20px 20px 16px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .top-header h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .top-header h1 i {
+            font-size: 1.6rem;
+            color: #7bc5f9;
+        }
+        .top-header p {
+            font-size: 0.8rem;
+            opacity: 0.9;
+            margin-top: 6px;
+        }
+
+        /* Menu Navegação */
+        .nav-menu {
+            background: white;
+            margin: -20px 16px 0 16px;
+            border-radius: 20px;
+            padding: 10px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+            position: relative;
+            z-index: 10;
+        }
+        .nav-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 6px;
+        }
+        .nav-btn {
+            background: transparent;
+            border: none;
+            padding: 10px 4px;
+            border-radius: 14px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 0.7rem;
+            color: #6b7a8a;
+            width: 100%;
+        }
+        .nav-btn i {
+            font-size: 1.3rem;
+        }
+        .nav-btn.active {
+            background: linear-gradient(135deg, #0f3b5f 0%, #1a5a7a 100%);
+            color: white;
+            box-shadow: 0 4px 12px rgba(15,59,95,0.3);
+        }
+        .nav-btn:hover:not(.active) {
+            background: #eef2fa;
+        }
+
+        /* Container */
+        .main-container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 0 16px;
+        }
+
+        /* Cards */
+        .form-card {
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+            overflow: hidden;
+        }
+        .card-header {
+            padding: 20px 24px 12px;
+            border-bottom: 2px solid #f0f2f8;
+        }
+        .card-header h2 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #0f3b5f;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .card-header h2 i {
+            color: #2c7da0;
+        }
+        form {
+            padding: 20px 24px 28px;
+        }
+        .form-group {
+            margin-bottom: 18px;
+        }
+        label {
+            display: block;
+            font-weight: 600;
+            font-size: 0.85rem;
+            margin-bottom: 8px;
+            color: #2c4a6e;
+        }
+        label i {
+            margin-right: 8px;
+            color: #2c7da0;
+            width: 20px;
+        }
+        select, input, textarea {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 12px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+            background: white;
+        }
+        select:focus, input:focus, textarea:focus {
+            outline: none;
+            border-color: #1a5a7a;
+            box-shadow: 0 0 0 3px rgba(26,90,122,0.1);
+        }
+        textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+        .btn-submit {
+            width: 100%;
+            background: linear-gradient(135deg, #0f3b5f 0%, #1a5a7a 100%);
+            color: white;
+            border: none;
+            padding: 14px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            border-radius: 40px;
+            margin-top: 16px;
+            cursor: pointer;
+            transition: transform 0.1s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        .btn-submit:active {
+            transform: scale(0.98);
+        }
+        .btn-submit:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
         
-        /* Menu Lateral ou Superior */
-        nav { background-color: #1a73e8; padding: 10px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; position: sticky; top: 0; z-index: 100; }
-        nav button { background: rgba(255,255,255,0.2); border: none; color: white; padding: 10px 15px; border-radius: 5px; cursor: pointer; font-weight: bold; }
-        nav button:hover { background: rgba(255,255,255,0.4); }
-        nav button.active { background: white; color: #1a73e8; }
-
-        .container { max-width: 500px; margin: 30px auto; background: white; padding: 25px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
-        .form-section { display: none; } /* Esconde todas as seções por padrão */
-        .form-section.active { display: block; } /* Mostra apenas a ativa */
-
-        h2 { color: #1a73e8; border-bottom: 2px solid #eee; padding-bottom: 10px; margin-top: 0; }
-        label { display: block; margin: 15px 0 5px; font-weight: bold; color: #555; }
-        select, input, textarea { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; }
-        button.submit-btn { width: 100%; padding: 12px; background-color: #28a745; color: white; border: none; border-radius: 4px; margin-top: 20px; cursor: pointer; font-size: 16px; }
-        button.submit-btn:disabled { background-color: #ccc; }
+        /* Seções */
+        .section-page {
+            display: none;
+        }
+        .section-page.active-page {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Toast */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            background: #1e293b;
+            color: white;
+            padding: 14px 20px;
+            border-radius: 50px;
+            text-align: center;
+            font-weight: 500;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+            font-size: 0.85rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        .toast.show {
+            opacity: 1;
+        }
+        
+        footer {
+            text-align: center;
+            font-size: 0.7rem;
+            color: #7e8b98;
+            margin-top: 20px;
+            padding: 16px;
+        }
+        
+        @media (max-width: 480px) {
+            .nav-btn span {
+                font-size: 0.6rem;
+            }
+            .nav-btn i {
+                font-size: 1.1rem;
+            }
+            .card-header h2 {
+                font-size: 1.2rem;
+            }
+            form {
+                padding: 16px 18px 22px;
+            }
+        }
     </style>
 </head>
 <body>
 
-<nav>
-    <button onclick="showSection('ponto')" id="btn-ponto" class="active">Ponto</button>
-    <button onclick="showSection('ausencias')" id="btn-ausencias">Ausências</button>
-    <button onclick="showSection('ocorrencias')" id="btn-ocorrencias">Ocorrências</button>
-    <button onclick="showSection('carga')" id="btn-carga">Carga</button>
-    <button onclick="showSection('avisos')" id="btn-avisos">Avisos</button>
-</nav>
-
-<div class="container">
-    
-    <div id="section-ponto" class="form-section active">
-        <h2>Registro de Ponto</h2>
-        <form onsubmit="enviarDados(event, 'Ponto')">
-            <label>Colaborador</label>
-            <select name="nome" required>
-                <option value="" disabled selected>Selecione...</option>
-            <option value="AILTON RODRIGUES DE SOUZA | Mat: 81065191 | Fun: Ciclista">AILTON RODRIGUES DE SOUZA | Mat: 81065191 | Fun: Ciclista</option>
-<option value="ALEXANDRE GANZER DE JESUS | Mat: 81136439 | Fun: Motociclista">ALEXANDRE GANZER DE JESUS | Mat: 81136439 | Fun: Motociclista</option>
-<option value="ANDERSON DOS REIS | Mat: 81063709 | Fun: Motociclista">ANDERSON DOS REIS | Mat: 81063709 | Fun: Motociclista</option>
-<option value="ANDERSON LUIS MENDES | Mat: 81112955 | Fun: Ciclista">ANDERSON LUIS MENDES | Mat: 81112955 | Fun: Ciclista</option>
-<option value="ANTONIO APARECIDO AGOSTINHO | Mat: 88926257 | Fun: Motorista">ANTONIO APARECIDO AGOSTINHO | Mat: 88926257 | Fun: Motorista</option>
-<option value="ARY DOS SANTOS | Mat: 81114877 | Fun: Interno">ARY DOS SANTOS | Mat: 81114877 | Fun: Interno</option>
-<option value="DAVID APARECIDO DA SILVA | Mat: 81131259 | Fun: Motociclista">DAVID APARECIDO DA SILVA | Mat: 81131259 | Fun: Motociclista</option>
-<option value="DOUGLAS LIRA DO CARMO | Mat: 81126468 | Fun: Motociclista">DOUGLAS LIRA DO CARMO | Mat: 81126468 | Fun: Motociclista</option>
-<option value="EDEMILSON DE PAULA | Mat: 88926249 | Fun: Interno">EDEMILSON DE PAULA | Mat: 88926249 | Fun: Interno</option>
-<option value="EDILSON AMARO DA SILVA JUNIOR | Mat: 89071093 | Fun: Ciclista">EDILSON AMARO DA SILVA JUNIOR | Mat: 89071093 | Fun: Ciclista</option>
-<option value="ERICSON TOMAZ NOBRE | Mat: 89243820 | Fun: Motociclista">ERICSON TOMAZ NOBRE | Mat: 89243820 | Fun: Motociclista</option>
-<option value="FLAVIO LUCIANO DA SILVA | Mat: 81111630 | Fun: Motorista">FLAVIO LUCIANO DA SILVA | Mat: 81111630 | Fun: Motorista</option>
-<option value="FRANCISCO NETO DA CONCEICAO | Mat: 81052197 | Fun: Motociclista">FRANCISCO NETO DA CONCEICAO | Mat: 81052197 | Fun: Motociclista</option>
-<option value="GENARO ELISIO BARBOSA | Mat: 89199472 | Fun: Motociclista">GENARO ELISIO BARBOSA | Mat: 89199472 | Fun: Motociclista</option>
-<option value="GILDEMBERG SANTOS LIMA | Mat: 89148690 | Fun: Motorista">GILDEMBERG SANTOS LIMA | Mat: 89148690 | Fun: Motorista</option>
-<option value="GILDERLANDIA SOUZA DA CUNHA MATIAS | Mat: 81077750 | Fun: Interno">GILDERLANDIA SOUZA DA CUNHA MATIAS | Mat: 81077750 | Fun: Interno</option>
-<option value="GILMAR ALEXANDRE VASCONCELOS | Mat: 89151461 | Fun: Motociclista">GILMAR ALEXANDRE VASCONCELOS | Mat: 89151461 | Fun: Motociclista</option>
-<option value="GUSTAVO SIMOES BARBOSA | Mat: 81060955 | Fun: Ciclista">GUSTAVO SIMOES BARBOSA | Mat: 81060955 | Fun: Ciclista</option>
-<option value="JOSE NILTON DA SILVA | Mat: 89084306 | Fun: Pedestre">JOSE NILTON DA SILVA | Mat: 89084306 | Fun: Pedestre</option>
-<option value="JOSUE LIMA DOS SANTOS | Mat: 89014138 | Fun: Motorista">JOSUE LIMA DOS SANTOS | Mat: 89014138 | Fun: Motorista</option>
-<option value="LENON MOREIRA ANTUNES | Mat: 81082991 | Fun: Gestão">LENON MOREIRA ANTUNES | Mat: 81082991 | Fun: Gestão</option>
-<option value="LUIS CARLOS DE ALMEIDA SANTOS | Mat: 81111111 | Fun: Pedestre">LUIS CARLOS DE ALMEIDA SANTOS | Mat: 81111111 | Fun: Pedestre</option>
-<option value="LUIZ CARLOS DA SILVA PAULA | Mat: 88991741 | Fun: Gestão">LUIZ CARLOS DA SILVA PAULA | Mat: 88991741 | Fun: Gestão</option>
-<option value="LUIZ FERNANDO VIEIRA | Mat: 81090544 | Fun: Gestão">LUIZ FERNANDO VIEIRA | Mat: 81090544 | Fun: Gestão</option>
-<option value="LUIZ GUSTAVO RIBEIRO | Mat: 89114078 | Fun: Motociclista">LUIZ GUSTAVO RIBEIRO | Mat: 89114078 | Fun: Motociclista</option>
-<option value="MARCEL RODRIGUES SILVEIRA | Mat: 81074085 | Fun: Ciclista">MARCEL RODRIGUES SILVEIRA | Mat: 81074085 | Fun: Ciclista</option>
-<option value="MARCIA PEREIRA DOS SANTOS | Mat: 81076681 | Fun: Interno">MARCIA PEREIRA DOS SANTOS | Mat: 81076681 | Fun: Interno</option>
-<option value="MARCIO ROBERTO RODRIGUES | Mat: 89175468 | Fun: Motociclista">MARCIO ROBERTO RODRIGUES | Mat: 89175468 | Fun: Motociclista</option>
-<option value="MARIA CLAUDILENE DOS SANTOS REIS | Mat: 81096402 | Fun: Pedestre">MARIA CLAUDILENE DOS SANTOS REIS | Mat: 81096402 | Fun: Pedestre</option>
-<option value="MARIA DE NAZARE DA SILVA SILVESTRE | Mat: 81139926 | Fun: Motorista">MARIA DE NAZARE DA SILVA SILVESTRE | Mat: 81139926 | Fun: Motorista</option>
-<option value="NEEMIAS MISAEL DIAS DE CARVALHO | Mat: 81076541 | Fun: Motorista">NEEMIAS MISAEL DIAS DE CARVALHO | Mat: 81076541 | Fun: Motorista</option>
-<option value="NEY DILSON MOREIRA ALVES | Mat: 81055293 | Fun: Ciclista">NEY DILSON MOREIRA ALVES | Mat: 81055293 | Fun: Ciclista</option>
-<option value="PATRICIA SIMOES BARBOSA DA LUZ | Mat: 81068565 | Fun: Pedestre">PATRICIA SIMOES BARBOSA DA LUZ | Mat: 81068565 | Fun: Pedestre</option>
-<option value="ROBERTO FAVARON RENALDINO | Mat: 89203909 | Fun: Motociclista">ROBERTO FAVARON RENALDINO | Mat: 89203909 | Fun: Motociclista</option>
-<option value="ROBSON LUIS DE ARRUDA MOURA | Mat: 81066228 | Fun: Motociclista">ROBSON LUIS DE ARRUDA MOURA | Mat: 81066228 | Fun: Motociclista</option>
-<option value="ROSANA MENDES | Mat: 81078170 | Fun: Pedestre">ROSANA MENDES | Mat: 81078170 | Fun: Pedestre</option>
-<option value="SEVERINO DA SILVA DELGADO | Mat: 81055366 | Fun: Ciclista">SEVERINO DA SILVA DELGADO | Mat: 81055366 | Fun: Ciclista</option>
-<option value="SILVANA VIEIRA DA SILVA | Mat: 89203690 | Fun: Pedestre">SILVANA VIEIRA DA SILVA | Mat: 89203690 | Fun: Pedestre</option>
-<option value="SIMONE GOMES BEZERRA BARBOSA | Mat: 81112874 | Fun: Motorista">SIMONE GOMES BEZERRA BARBOSA | Mat: 81112874 | Fun: Motorista</option>
-<option value="WILLIAM DE OLIVEIRA MOURA | Mat: 81106416 | Fun: Motorista">WILLIAM DE OLIVEIRA MOURA | Mat: 81106416 | Fun: Motorista</option>
-<option value="WILSON LIMA DE OLIVEIRA | Mat: 81075715 | Fun: Motorista">WILSON LIMA DE OLIVEIRA | Mat: 81075715 | Fun: Motorista</option>
-</select>
-            <label>Motivo</label>
-            <select name="motivoPonto" required>
-                <option value="Presente">Presente</option>
-                <option value="AM">AM</option>
-                <option value="LM">LM</option>
-                <option value="Folga">Folga</option>
-            </select>
-            <button type="submit" class="submit-btn">Registrar Ponto</button>
-        </form>
-    </div>
-
-    <div id="section-ausencias" class="form-section">
-        <h2>Ausências Programadas</h2>
-        <form onsubmit="enviarDados(event, 'Ausencias')">
-            <label>Colaborador</label>
-            <select name="colaborador" required>
-                <option value="" disabled selected>Selecione...</option>
-            <option value="AILTON RODRIGUES DE SOUZA | Mat: 81065191 | Fun: Ciclista">AILTON RODRIGUES DE SOUZA | Mat: 81065191 | Fun: Ciclista</option>
-<option value="ALEXANDRE GANZER DE JESUS | Mat: 81136439 | Fun: Motociclista">ALEXANDRE GANZER DE JESUS | Mat: 81136439 | Fun: Motociclista</option>
-<option value="ANDERSON DOS REIS | Mat: 81063709 | Fun: Motociclista">ANDERSON DOS REIS | Mat: 81063709 | Fun: Motociclista</option>
-<option value="ANDERSON LUIS MENDES | Mat: 81112955 | Fun: Ciclista">ANDERSON LUIS MENDES | Mat: 81112955 | Fun: Ciclista</option>
-<option value="ANTONIO APARECIDO AGOSTINHO | Mat: 88926257 | Fun: Motorista">ANTONIO APARECIDO AGOSTINHO | Mat: 88926257 | Fun: Motorista</option>
-<option value="ARY DOS SANTOS | Mat: 81114877 | Fun: Interno">ARY DOS SANTOS | Mat: 81114877 | Fun: Interno</option>
-<option value="DAVID APARECIDO DA SILVA | Mat: 81131259 | Fun: Motociclista">DAVID APARECIDO DA SILVA | Mat: 81131259 | Fun: Motociclista</option>
-<option value="DOUGLAS LIRA DO CARMO | Mat: 81126468 | Fun: Motociclista">DOUGLAS LIRA DO CARMO | Mat: 81126468 | Fun: Motociclista</option>
-<option value="EDEMILSON DE PAULA | Mat: 88926249 | Fun: Interno">EDEMILSON DE PAULA | Mat: 88926249 | Fun: Interno</option>
-<option value="EDILSON AMARO DA SILVA JUNIOR | Mat: 89071093 | Fun: Ciclista">EDILSON AMARO DA SILVA JUNIOR | Mat: 89071093 | Fun: Ciclista</option>
-<option value="ERICSON TOMAZ NOBRE | Mat: 89243820 | Fun: Motociclista">ERICSON TOMAZ NOBRE | Mat: 89243820 | Fun: Motociclista</option>
-<option value="FLAVIO LUCIANO DA SILVA | Mat: 81111630 | Fun: Motorista">FLAVIO LUCIANO DA SILVA | Mat: 81111630 | Fun: Motorista</option>
-<option value="FRANCISCO NETO DA CONCEICAO | Mat: 81052197 | Fun: Motociclista">FRANCISCO NETO DA CONCEICAO | Mat: 81052197 | Fun: Motociclista</option>
-<option value="GENARO ELISIO BARBOSA | Mat: 89199472 | Fun: Motociclista">GENARO ELISIO BARBOSA | Mat: 89199472 | Fun: Motociclista</option>
-<option value="GILDEMBERG SANTOS LIMA | Mat: 89148690 | Fun: Motorista">GILDEMBERG SANTOS LIMA | Mat: 89148690 | Fun: Motorista</option>
-<option value="GILDERLANDIA SOUZA DA CUNHA MATIAS | Mat: 81077750 | Fun: Interno">GILDERLANDIA SOUZA DA CUNHA MATIAS | Mat: 81077750 | Fun: Interno</option>
-<option value="GILMAR ALEXANDRE VASCONCELOS | Mat: 89151461 | Fun: Motociclista">GILMAR ALEXANDRE VASCONCELOS | Mat: 89151461 | Fun: Motociclista</option>
-<option value="GUSTAVO SIMOES BARBOSA | Mat: 81060955 | Fun: Ciclista">GUSTAVO SIMOES BARBOSA | Mat: 81060955 | Fun: Ciclista</option>
-<option value="JOSE NILTON DA SILVA | Mat: 89084306 | Fun: Pedestre">JOSE NILTON DA SILVA | Mat: 89084306 | Fun: Pedestre</option>
-<option value="JOSUE LIMA DOS SANTOS | Mat: 89014138 | Fun: Motorista">JOSUE LIMA DOS SANTOS | Mat: 89014138 | Fun: Motorista</option>
-<option value="LENON MOREIRA ANTUNES | Mat: 81082991 | Fun: Gestão">LENON MOREIRA ANTUNES | Mat: 81082991 | Fun: Gestão</option>
-<option value="LUIS CARLOS DE ALMEIDA SANTOS | Mat: 81111111 | Fun: Pedestre">LUIS CARLOS DE ALMEIDA SANTOS | Mat: 81111111 | Fun: Pedestre</option>
-<option value="LUIZ CARLOS DA SILVA PAULA | Mat: 88991741 | Fun: Gestão">LUIZ CARLOS DA SILVA PAULA | Mat: 88991741 | Fun: Gestão</option>
-<option value="LUIZ FERNANDO VIEIRA | Mat: 81090544 | Fun: Gestão">LUIZ FERNANDO VIEIRA | Mat: 81090544 | Fun: Gestão</option>
-<option value="LUIZ GUSTAVO RIBEIRO | Mat: 89114078 | Fun: Motociclista">LUIZ GUSTAVO RIBEIRO | Mat: 89114078 | Fun: Motociclista</option>
-<option value="MARCEL RODRIGUES SILVEIRA | Mat: 81074085 | Fun: Ciclista">MARCEL RODRIGUES SILVEIRA | Mat: 81074085 | Fun: Ciclista</option>
-<option value="MARCIA PEREIRA DOS SANTOS | Mat: 81076681 | Fun: Interno">MARCIA PEREIRA DOS SANTOS | Mat: 81076681 | Fun: Interno</option>
-<option value="MARCIO ROBERTO RODRIGUES | Mat: 89175468 | Fun: Motociclista">MARCIO ROBERTO RODRIGUES | Mat: 89175468 | Fun: Motociclista</option>
-<option value="MARIA CLAUDILENE DOS SANTOS REIS | Mat: 81096402 | Fun: Pedestre">MARIA CLAUDILENE DOS SANTOS REIS | Mat: 81096402 | Fun: Pedestre</option>
-<option value="MARIA DE NAZARE DA SILVA SILVESTRE | Mat: 81139926 | Fun: Motorista">MARIA DE NAZARE DA SILVA SILVESTRE | Mat: 81139926 | Fun: Motorista</option>
-<option value="NEEMIAS MISAEL DIAS DE CARVALHO | Mat: 81076541 | Fun: Motorista">NEEMIAS MISAEL DIAS DE CARVALHO | Mat: 81076541 | Fun: Motorista</option>
-<option value="NEY DILSON MOREIRA ALVES | Mat: 81055293 | Fun: Ciclista">NEY DILSON MOREIRA ALVES | Mat: 81055293 | Fun: Ciclista</option>
-<option value="PATRICIA SIMOES BARBOSA DA LUZ | Mat: 81068565 | Fun: Pedestre">PATRICIA SIMOES BARBOSA DA LUZ | Mat: 81068565 | Fun: Pedestre</option>
-<option value="ROBERTO FAVARON RENALDINO | Mat: 89203909 | Fun: Motociclista">ROBERTO FAVARON RENALDINO | Mat: 89203909 | Fun: Motociclista</option>
-<option value="ROBSON LUIS DE ARRUDA MOURA | Mat: 81066228 | Fun: Motociclista">ROBSON LUIS DE ARRUDA MOURA | Mat: 81066228 | Fun: Motociclista</option>
-<option value="ROSANA MENDES | Mat: 81078170 | Fun: Pedestre">ROSANA MENDES | Mat: 81078170 | Fun: Pedestre</option>
-<option value="SEVERINO DA SILVA DELGADO | Mat: 81055366 | Fun: Ciclista">SEVERINO DA SILVA DELGADO | Mat: 81055366 | Fun: Ciclista</option>
-<option value="SILVANA VIEIRA DA SILVA | Mat: 89203690 | Fun: Pedestre">SILVANA VIEIRA DA SILVA | Mat: 89203690 | Fun: Pedestre</option>
-<option value="SIMONE GOMES BEZERRA BARBOSA | Mat: 81112874 | Fun: Motorista">SIMONE GOMES BEZERRA BARBOSA | Mat: 81112874 | Fun: Motorista</option>
-<option value="WILLIAM DE OLIVEIRA MOURA | Mat: 81106416 | Fun: Motorista">WILLIAM DE OLIVEIRA MOURA | Mat: 81106416 | Fun: Motorista</option>
-<option value="WILSON LIMA DE OLIVEIRA | Mat: 81075715 | Fun: Motorista">WILSON LIMA DE OLIVEIRA | Mat: 81075715 | Fun: Motorista</option>
-
-            </select>
-            <label>Tipo</label>
-            <select name="tipo" required>
-                <option value="Férias">Férias</option>
-                <option value="Folga">Folga</option>
-                <option value="Licensa">Licensa</option>
-                <option value="Particular">Particular</option>
-            </select>
-            <label>Início</label>
-            <input type="date" name="inicio" required>
-            <label>Fim</label>
-            <input type="date" name="fim" required>
-            <button type="submit" class="submit-btn">Salvar Ausência</button>
-        </form>
-    </div>
-
-    <div id="section-ocorrencias" class="form-section">
-        <h2>Ocorrências Gerais</h2>
-        <form onsubmit="enviarDados(event, 'Ocorrencias')">
-            <label>Motivo</label>
-            <select name="motivo" required>
-                <option value="Atraso LTR">Atraso LTR</option>
-                <option value="Sedex 2º carga">Sedex 2º carga</option>
-                <option value="Diversos">Diversos</option>
-            </select>
-            <label>Detalhes</label>
-            <textarea name="detalhes" required></textarea>
-            <label>Número da CIE (Opcional)</label>
-            <input type="text" name="cie">
-            <button type="submit" class="submit-btn">Salvar Ocorrência</button>
-        </form>
-    </div>
-
-    <div id="section-carga" class="form-section">
-        <h2>Controle de Carga</h2>
-        <form onsubmit="enviarDados(event, 'Carga')">
-            <label>Qualificados Distribuídos/Adiantados</label>
-            <input type="text" name="qualificados" required>
-            <label>Quantidade</label>
-            <input type="number" name="quantidade" required>
-            <button type="submit" class="submit-btn">Registrar Carga</button>
-        </form>
-    </div>
-
-    <div id="section-avisos" class="form-section">
-        <h2>Quadro de Avisos</h2>
-        <form onsubmit="enviarDados(event, 'Avisos')">
-            <label>Título do Aviso</label>
-            <input type="text" name="titulo" required>
-            <label>Descrição</label>
-            <textarea name="descricao" required></textarea>
-            <label>Prioridade</label>
-            <select name="prioridade" required>
-                <option value="Alta">Alta</option>
-                <option value="Média">Média</option>
-                <option value="Baixa">Baixa</option>
-            </select>
-            <label>Prazo</label>
-            <input type="date" name="prazo" required>
-            <button type="submit" class="submit-btn">Publicar Aviso</button>
-        </form>
-    </div>
-
+<div class="top-header">
+    <h1><i class="fas fa-clipboard-list"></i> CDD Itu - Gestão Integrada</h1>
+    <p><i class="fas fa-map-marker-alt"></i> Centro de Distribuição | Ponto · Ausências · Ocorrências · Carga · Avisos</p>
 </div>
 
-<script>
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbxNwKN_MwXOhCLyeBmuFBlkJjFkKi_iLFBLs9znxg4xw9jKefCmq0GBCcQbhE04lsNd/exec';
+<div class="nav-menu">
+    <div class="nav-grid">
+        <button class="nav-btn active" data-page="ponto">
+            <i class="fas fa-fingerprint"></i>
+            <span>Ponto</span>
+        </button>
+        <button class="nav-btn" data-page="ausencias">
+            <i class="fas fa-calendar-minus"></i>
+            <span>Ausências</span>
+        </button>
+        <button class="nav-btn" data-page="ocorrencias">
+            <i class="fas fa-exclamation-triangle"></i>
+            <span>Ocorrências</span>
+        </button>
+        <button class="nav-btn" data-page="carga">
+            <i class="fas fa-boxes"></i>
+            <span>Carga</span>
+        </button>
+        <button class="nav-btn" data-page="avisos">
+            <i class="fas fa-bullhorn"></i>
+            <span>Avisos</span>
+        </button>
+    </div>
+</div>
 
-    // Função para trocar de aba no HTML
-    function showSection(sectionId) {
-        document.querySelectorAll('.form-section').forEach(s => s.classList.remove('active'));
-        document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+<div class="main-container">
+    <!-- Página Ponto -->
+    <div id="page-ponto" class="section-page active-page">
+        <div class="form-card">
+            <div class="card-header">
+                <h2><i class="fas fa-clock"></i> Registro de Ponto</h2>
+            </div>
+            <form id="formPonto">
+                <div class="form-group">
+                    <label><i class="fas fa-user"></i> Colaborador</label>
+                    <select id="pontoSelect" name="nome" required>
+                        <option value="">Selecione um colaborador...</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-flag-checkered"></i> Situação</label>
+                    <select name="motivoPonto" required>
+                        <option value="Presente">✅ Presente</option>
+                        <option value="Férias">🏖️ Férias</option>
+                        <option value="AM">📋 AM (Atestado Médico)</option>
+                        <option value="LM">📋 LM (Licença Médica)</option>
+                        <option value="Folga">🌿 Folga</option>
+                        <option value="Serviço Externo">🚚 Serviço Externo</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn-submit"><i class="fas fa-save"></i> Registrar Ponto</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Página Ausências -->
+    <div id="page-ausencias" class="section-page">
+        <div class="form-card">
+            <div class="card-header">
+                <h2><i class="fas fa-umbrella-beach"></i> Ausências Programadas</h2>
+            </div>
+            <form id="formAusencias">
+                <div class="form-group">
+                    <label><i class="fas fa-user"></i> Colaborador</label>
+                    <select id="ausenciaSelect" name="colaborador" required>
+                        <option value="">Selecione um colaborador...</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-tag"></i> Tipo</label>
+                    <select name="tipo" required>
+                        <option value="Férias">Férias</option>
+                        <option value="Folga">Folga</option>
+                        <option value="Licensa">Licença</option>
+                        <option value="Particular">Particular</option>
+                        <option value="Serviço Externo">Serviço Externo</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-calendar-alt"></i> Data Início</label>
+                    <input type="date" name="inicio" required>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-calendar-check"></i> Data Fim</label>
+                    <input type="date" name="fim" required>
+                </div>
+                <button type="submit" class="btn-submit"><i class="fas fa-save"></i> Salvar Ausência</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Página Ocorrências -->
+    <div id="page-ocorrencias" class="section-page">
+        <div class="form-card">
+            <div class="card-header">
+                <h2><i class="fas fa-file-alt"></i> Ocorrências Gerais</h2>
+            </div>
+            <form id="formOcorrencias">
+                <div class="form-group">
+                    <label><i class="fas fa-list"></i> Motivo</label>
+                    <select name="motivo" required>
+                        <option value="Atraso LTR">Atraso LTR</option>
+                        <option value="Sedex 2º carga">Sedex 2º carga</option>
+                        <option value="Diversos">Diversos</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-pen-alt"></i> Detalhes</label>
+                    <textarea name="detalhes" placeholder="Descreva a ocorrência em detalhes..." required></textarea>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-barcode"></i> Número da CIE (Opcional)</label>
+                    <input type="text" name="cie" placeholder="Ex: CIE-2024-001">
+                </div>
+                <button type="submit" class="btn-submit"><i class="fas fa-save"></i> Registrar Ocorrência</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Página Carga -->
+    <div id="page-carga" class="section-page">
+        <div class="form-card">
+            <div class="card-header">
+                <h2><i class="fas fa-truck"></i> Controle de Carga</h2>
+            </div>
+            <form id="formCarga">
+                <div class="form-group">
+                    <label><i class="fas fa-chalkboard"></i> Qualificados Distribuídos</label>
+                    <input type="text" name="qualificados" placeholder="Ex: Motoristas, Ciclistas, Auxiliares" required>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-hashtag"></i> Quantidade</label>
+                    <input type="number" name="quantidade" placeholder="Número de volumes/colaboradores" required>
+                </div>
+                <button type="submit" class="btn-submit"><i class="fas fa-save"></i> Registrar Carga</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Página Avisos -->
+    <div id="page-avisos" class="section-page">
+        <div class="form-card">
+            <div class="card-header">
+                <h2><i class="fas fa-bullhorn"></i> Quadro de Avisos</h2>
+            </div>
+            <form id="formAvisos">
+                <div class="form-group">
+                    <label><i class="fas fa-heading"></i> Título</label>
+                    <input type="text" name="titulo" placeholder="Título do aviso" required>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-align-left"></i> Descrição</label>
+                    <textarea name="descricao" placeholder="Descreva o aviso detalhadamente..." required></textarea>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-flag"></i> Prioridade</label>
+                    <select name="prioridade" required>
+                        <option value="Alta">🔴 Alta - Urgente</option>
+                        <option value="Média">🟠 Média - Importante</option>
+                        <option value="Baixa">🟢 Baixa - Informativo</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-hourglass"></i> Prazo/Validade</label>
+                    <input type="date" name="prazo" required>
+                </div>
+                <button type="submit" class="btn-submit"><i class="fas fa-share-alt"></i> Publicar Aviso</button>
+            </form>
+        </div>
+    </div>
+    <footer><i class="fas fa-shield-alt"></i> Sistema Integrado CDD Itu · Dados enviados com segurança para a planilha</footer>
+</div>
+
+<div id="toast" class="toast"></div>
+
+<script>
+    // LISTA COMPLETA DE COLABORADORES
+    const listaColaboradores = [
+        "AILTON RODRIGUES DE SOUZA | Mat: 81065191 | Fun: Ciclista",
+        "ALEXANDRE GANZER DE JESUS | Mat: 81136439 | Fun: Motociclista",
+        "ANDERSON DOS REIS | Mat: 81063709 | Fun: Motociclista",
+        "ANDERSON LUIS MENDES | Mat: 81112955 | Fun: Ciclista",
+        "ANTONIO APARECIDO AGOSTINHO | Mat: 88926257 | Fun: Motorista",
+        "ARY DOS SANTOS | Mat: 81114877 | Fun: Interno",
+        "DAVID APARECIDO DA SILVA | Mat: 81131259 | Fun: Motociclista",
+        "DOUGLAS LIRA DO CARMO | Mat: 81126468 | Fun: Motociclista",
+        "EDEMILSON DE PAULA | Mat: 88926249 | Fun: Interno",
+        "EDILSON AMARO DA SILVA JUNIOR | Mat: 89071093 | Fun: Ciclista",
+        "ERICSON TOMAZ NOBRE | Mat: 89243820 | Fun: Motociclista",
+        "FLAVIO LUCIANO DA SILVA | Mat: 81111630 | Fun: Motorista",
+        "FRANCISCO NETO DA CONCEICAO | Mat: 81052197 | Fun: Motociclista",
+        "GENARO ELISIO BARBOSA | Mat: 89199472 | Fun: Motociclista",
+        "GILDEMBERG SANTOS LIMA | Mat: 89148690 | Fun: Motorista",
+        "GILDERLANDIA SOUZA DA CUNHA MATIAS | Mat: 81077750 | Fun: Interno",
+        "GILMAR ALEXANDRE VASCONCELOS | Mat: 89151461 | Fun: Motociclista",
+        "GUSTAVO SIMOES BARBOSA | Mat: 81060955 | Fun: Ciclista",
+        "JOSE NILTON DA SILVA | Mat: 89084306 | Fun: Pedestre",
+        "JOSUE LIMA DOS SANTOS | Mat: 89014138 | Fun: Motorista",
+        "LENON MOREIRA ANTUNES | Mat: 81082991 | Fun: Gestão",
+        "LUIS CARLOS DE ALMEIDA SANTOS | Mat: 81111111 | Fun: Pedestre",
+        "LUIZ CARLOS DA SILVA PAULA | Mat: 88991741 | Fun: Gestão",
+        "LUIZ FERNANDO VIEIRA | Mat: 81090544 | Fun: Gestão",
+        "LUIZ GUSTAVO RIBEIRO | Mat: 89114078 | Fun: Motociclista",
+        "MARCEL RODRIGUES SILVEIRA | Mat: 81074085 | Fun: Ciclista",
+        "MARCIA PEREIRA DOS SANTOS | Mat: 81076681 | Fun: Interno",
+        "MARCIO ROBERTO RODRIGUES | Mat: 89175468 | Fun: Motociclista",
+        "MARIA CLAUDILENE DOS SANTOS REIS | Mat: 81096402 | Fun: Pedestre",
+        "MARIA DE NAZARE DA SILVA SILVESTRE | Mat: 81139926 | Fun: Motorista",
+        "NEEMIAS MISAEL DIAS DE CARVALHO | Mat: 81076541 | Fun: Motorista",
+        "NEY DILSON MOREIRA ALVES | Mat: 81055293 | Fun: Ciclista",
+        "PATRICIA SIMOES BARBOSA DA LUZ | Mat: 81068565 | Fun: Pedestre",
+        "ROBERTO FAVARON RENALDINO | Mat: 89203909 | Fun: Motociclista",
+        "ROBSON LUIS DE ARRUDA MOURA | Mat: 81066228 | Fun: Motociclista",
+        "ROSANA MENDES | Mat: 81078170 | Fun: Pedestre",
+        "SEVERINO DA SILVA DELGADO | Mat: 81055366 | Fun: Ciclista",
+        "SILVANA VIEIRA DA SILVA | Mat: 89203690 | Fun: Pedestre",
+        "SIMONE GOMES BEZERRA BARBOSA | Mat: 81112874 | Fun: Motorista",
+        "WILLIAM DE OLIVEIRA MOURA | Mat: 81106416 | Fun: Motorista",
+        "WILSON LIMA DE OLIVEIRA | Mat: 81075715 | Fun: Motorista"
+    ];
+
+    // URL do Google Apps Script
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxNwKN_MwXOhCLyeBmuFBlkJjFkKi_iLFBLs9znxg4xw9jKefCmq0GBCcQbhE04lsNd/exec';
+
+    // FUNÇÃO PARA POPULAR OS SELECTS
+    function popularColaboradores() {
+        const selectPonto = document.getElementById('pontoSelect');
+        const selectAusencia = document.getElementById('ausenciaSelect');
         
-        document.getElementById('section-' + sectionId).classList.add('active');
-        document.getElementById('btn-' + sectionId).classList.add('active');
+        if (selectPonto) {
+            selectPonto.innerHTML = '<option value="">Selecione um colaborador...</option>';
+            listaColaboradores.forEach(colab => {
+                const option = document.createElement('option');
+                option.value = colab;
+                option.textContent = colab;
+                selectPonto.appendChild(option);
+            });
+        }
+        
+        if (selectAusencia) {
+            selectAusencia.innerHTML = '<option value="">Selecione um colaborador...</option>';
+            listaColaboradores.forEach(colab => {
+                const option = document.createElement('option');
+                option.value = colab;
+                option.textContent = colab;
+                selectAusencia.appendChild(option);
+            });
+        }
     }
 
-    // Função única para enviar qualquer formulário
-    function enviarDados(event, nomeAba) {
-        event.preventDefault();
-        const form = event.target;
-        const btn = form.querySelector('button');
-        btn.disabled = true;
-        btn.innerText = 'Enviando...';
-
-        // Pega todos os dados do formulário automaticamente
-        const formData = new FormData(form);
-        const objetoDados = { abaDestino: nomeAba };
-        formData.forEach((value, key) => objetoDados[key] = value);
-
-        fetch(scriptURL, { method: 'POST', body: JSON.stringify(objetoDados) })
-        .then(res => {
-            alert('Dados salvos com sucesso na aba ' + nomeAba);
-            form.reset();
-        })
-        .catch(err => alert('Erro: ' + err.message))
-        .finally(() => {
-            btn.disabled = false;
-            btn.innerText = 'Enviar';
+    // FUNÇÃO DE NAVEGAÇÃO
+    function iniciarNavegacao() {
+        const botoes = document.querySelectorAll('.nav-btn');
+        const paginas = document.querySelectorAll('.section-page');
+        
+        botoes.forEach(botao => {
+            botao.addEventListener('click', function() {
+                const paginaId = this.getAttribute('data-page');
+                
+                // Remove active de todos os botões
+                botoes.forEach(btn => btn.classList.remove('active'));
+                // Adiciona active no botão clicado
+                this.classList.add('active');
+                
+                // Esconde todas as páginas
+                paginas.forEach(pagina => pagina.classList.remove('active-page'));
+                
+                // Mostra a página selecionada
+                const paginaAtiva = document.getElementById(`page-${paginaId}`);
+                if (paginaAtiva) {
+                    paginaAtiva.classList.add('active-page');
+                }
+            });
         });
     }
-</script>
 
+    // FUNÇÃO TOAST
+    function mostrarToast(mensagem, erro = false) {
+        const toast = document.getElementById('toast');
+        toast.textContent = mensagem;
+        toast.style.backgroundColor = erro ? '#dc2626' : '#0f3b5f';
+        toast.classList.add('show');
+        setTimeout(() => {
+            toast.classList.remove('show');
+        }, 3000);
+    }
+
+    // FUNÇÃO PARA ENVIAR DADOS
+    async function enviarDados(event, nomeAba, formElement) {
+        event.preventDefault();
+        
+        const botao = formElement.querySelector('.btn-submit');
+        const textoOriginal = botao.innerHTML;
+        
+        botao.disabled = true;
+        botao.innerHTML = '<i class="fas fa-spinner fa-pulse"></i> Enviando...';
+        
+        const formData = new FormData(formElement);
+        const dados = { abaDestino: nomeAba };
+        
+        formData.forEach((valor, chave) => {
+            dados[chave] = valor;
+        });
+        
+        dados.dataHora = new Date().toLocaleString('pt-BR');
+        
+        try {
+            const response = await fetch(SCRIPT_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(dados)
+            });
+            
+            mostrarToast(`✅ ${nomeAba} registrado com sucesso!`);
+            formElement.reset();
+            
+            // Resetar campos de data para hoje
+            const inputsData = formElement.querySelectorAll('input[type="date"]');
+            const hoje = new Date().toISOString().split('T')[0];
+            inputsData.forEach(input => {
+                if (!input.value) input.value = hoje;
+            });
+            
+        } catch (error) {
+            console.error('Erro:', error);
+            mostrarToast(`❌ Erro ao enviar: ${error.message}`, true);
+        } finally {
+            botao.disabled = false;
+            botao.innerHTML = textoOriginal;
+        }
+    }
+
+    // INICIALIZAR FORMULÁRIOS
+    function inicializarFormularios() {
+        const formPonto = document.getElementById('formPonto');
+        const formAusencias = document.getElementById('formAusencias');
+        const formOcorrencias = document.getElementById('formOcorrencias');
+        const formCarga = document.getElementById('formCarga');
+        const formAvisos = document.getElementById('formAvisos');
+        
+        if (formPonto) formPonto.addEventListener('submit', (e) => enviarDados(e, 'Ponto', formPonto));
+        if (formAusencias) formAusencias.addEventListener('submit', (e) => enviarDados(e, 'Ausencias', formAusencias));
+        if (formOcorrencias) formOcorrencias.addEventListener('submit', (e) => enviarDados(e, 'Ocorrencias', formOcorrencias));
+        if (formCarga) formCarga.addEventListener('submit', (e) => enviarDados(e, 'Carga', formCarga));
+        if (formAvisos) formAvisos.addEventListener('submit', (e) => enviarDados(e, 'Avisos', formAvisos));
+    }
+
+    // CONFIGURAR DATAS PADRÃO
+    function configurarDatas() {
+        const hoje = new Date().toISOString().split('T')[0];
+        const inputsData = document.querySelectorAll('input[type="date"]');
+        inputsData.forEach(input => {
+            if (!input.value) {
+                input.value = hoje;
+            }
+        });
+    }
+
+    // INICIALIZAÇÃO PRINCIPAL
+    document.addEventListener('DOMContentLoaded', function() {
+        popularColaboradores();
+        iniciarNavegacao();
+        inicializarFormularios();
+        configurarDatas();
+        console.log('Sistema inicializado com sucesso!');
+    });
+</script>
 </body>
 </html>
