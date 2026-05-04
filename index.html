@@ -101,6 +101,7 @@
             border-radius: 24px;
             box-shadow: 0 4px 16px rgba(0,0,0,0.05);
             overflow: hidden;
+            margin-bottom: 16px;
         }
         .card-header {
             padding: 20px 24px 12px;
@@ -117,6 +118,68 @@
         .card-header h2 i {
             color: #2c7da0;
         }
+        
+        /* Link da Planilha */
+        .sheet-link-card {
+            background: linear-gradient(135deg, #e8f0f8 0%, #dce8f2 100%);
+            border-radius: 24px;
+            padding: 16px 20px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+            border: 1px solid rgba(15,59,95,0.15);
+            transition: all 0.3s ease;
+        }
+        .sheet-link-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+        }
+        .sheet-link-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex: 1;
+        }
+        .sheet-link-info i {
+            font-size: 2rem;
+            color: #0f3b5f;
+        }
+        .sheet-link-text h4 {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #0f3b5f;
+            margin-bottom: 4px;
+        }
+        .sheet-link-text p {
+            font-size: 0.7rem;
+            color: #4a6a8a;
+        }
+        .btn-sheet {
+            background: linear-gradient(135deg, #0f3b5f 0%, #1a5a7a 100%);
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 40px;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 0.8rem;
+            transition: transform 0.1s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+        .btn-sheet:active {
+            transform: scale(0.96);
+        }
+        .btn-sheet i {
+            font-size: 0.9rem;
+        }
+
         form {
             padding: 20px 24px 28px;
         }
@@ -237,6 +300,17 @@
             form {
                 padding: 16px 18px 22px;
             }
+            .sheet-link-card {
+                flex-direction: column;
+                align-items: stretch;
+                text-align: center;
+            }
+            .sheet-link-info {
+                justify-content: center;
+            }
+            .btn-sheet {
+                justify-content: center;
+            }
         }
     </style>
 </head>
@@ -273,6 +347,23 @@
 </div>
 
 <div class="main-container">
+    <!-- Link da Planilha - Visível em todas as abas -->
+    <div class="sheet-link-card" id="sheetLinkCard">
+        <div class="sheet-link-info">
+            <i class="fas fa-table"></i>
+            <div class="sheet-link-text">
+                <h4><i class="fas fa-google"></i> Planilha Mestra CDD Itu</h4>
+                <p>Acesse todos os registros e relatórios em tempo real</p>
+            </div>
+        </div>
+        <a href="https://docs.google.com/spreadsheets/d/1vBnA7XPorEFgGn2R1pO3ZxQyLHnV2MCurTzm_HOT_is/edit?gid=1174322685#gid=1174322685" 
+           target="_blank" 
+           class="btn-sheet"
+           id="openSheetBtn">
+            <i class="fas fa-external-link-alt"></i> Abrir Planilha
+        </a>
+    </div>
+
     <!-- Página Ponto -->
     <div id="page-ponto" class="section-page active-page">
         <div class="form-card">
